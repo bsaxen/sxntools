@@ -3,11 +3,13 @@
   </head>
   <?php
   echo("<body>");
-  echo("<h1>XSIM Remote Control</h1>");
+  echo("<h1>XSIM Remote Control v1.0</h1>");
 
   if(isset($_GET['client']))
   {
     $client = $_GET['client'];
+    $do = $_GET['do'];
+    
     echo("
     <form action=\"xsim_ctrl.php\" method=\"post\">
           <input type=\"hidden\" name=\"client\" value=\"$client\" />
@@ -15,6 +17,8 @@
           <button type=\"submit\">Execute $client</button>
     </form>
   ");
+    if($do == 'show')
+    {
     $file = $client.'.res';
     if(file_exists($file))
     {
@@ -32,6 +36,14 @@
       }
       fclose($fh);
       echo("=====================<br>");
+    }
+    }
+    if ($do == 'delete')
+    {
+      $file = $client.'.res';
+      unlink($file);
+      $file = $client.'.poll';
+      unlink($file);
     }
   }
 
@@ -60,7 +72,7 @@
         {
           $temp = explode(".",$row);
           $id = $temp[0];
-          echo("<a href=\"xsim_ctrl.php?client=$id\">$id</a>");
+          echo("<a href=\"xsim_ctrl.php?client=$id&do=show\">$id</a>");
           if(file_exists($row))
           { 
             $fh2 = fopen($row, 'r');
@@ -68,6 +80,7 @@
             fclose($fh2);
             echo(" [$row]<br>");
           }
+          echo("<a href=\"xsim_ctrl.php?client=$id&do=delete\"> delete </a>");
         }
       }
     fclose($fh);

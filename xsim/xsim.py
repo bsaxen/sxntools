@@ -1,13 +1,17 @@
 #!/usr/bin/python
 #==================================================
 # xsim_client.py
-# 2016-12-06
+# 2016-12-10
 # Benny Saxen
+#
+# Prepare client for copy file to server
+# ssh-keygen -t rsa
+# ssh-copy-id <user>@<url>
 #==================================================
 import time
 import httplib
 import os
-g_client_name = 'benny'
+g_client_name = 'test_name'
 g_server      = 'nabton.com'
 g_path        = '/xsim/xsim.php'
 g_box         = 'folke@nabton.com:/var/www/html/xsim/.'

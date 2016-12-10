@@ -13,8 +13,8 @@ import httplib
 import os
 g_client_name = 'test_name'
 g_server      = 'nabton.com'
-g_path        = '/xsim/xsim.php'
-g_box         = 'folke@nabton.com:/var/www/html/xsim/.'
+g_path        = '/sxntools/xsim/xsim.php'
+g_box         = 'folke@nabton.com:/var/www/html/sxntools/xsim/.'
 g_delay       = 5
 g_any = g_path+ "?msg=1&client=%s" % (g_client_name) 
 while 1:
@@ -29,8 +29,8 @@ while 1:
             # check if data1 has any order
             if 'xsim:' in line:
                 order=line.split(':')
-                xsys = order[1] + " > %s.res" % (g_client_name)
-                print line
+                xsys = order[1] + " > %s.res 2>&1" % (g_client_name)
+                #print line
                 print xsys
                 os.system(xsys);
                 xsys = "scp %s.res %s" % (g_client_name, g_box)

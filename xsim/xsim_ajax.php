@@ -1,6 +1,7 @@
 <?php
- $file = "benny.res";
-  $fh = fopen($file, 'r') or die("no poll list");
+$client = $_GET['client'];
+ $file = $client.'.res';
+  $fh = fopen($file, 'r') or die("$client no data");
   while(!feof($fh)) 
   {
      $row = fgets($fh);

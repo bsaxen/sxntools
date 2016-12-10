@@ -78,9 +78,9 @@
             $fh2 = fopen($row, 'r');
             $row = fgets($fh2);
             fclose($fh2);
-            echo(" [$row]<br>");
+            echo(" [$row]");
           }
-          echo("<a href=\"xsim_ctrl.php?client=$id&do=delete\"> delete </a>");
+          echo("<a href=\"xsim_ctrl.php?client=$id&do=delete\"> <i>delete</i> </a><br>");
         }
       }
     fclose($fh);

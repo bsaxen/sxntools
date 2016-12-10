@@ -15,7 +15,7 @@ g_client_name = 'test_name'
 g_server      = 'nabton.com'
 g_path        = '/sxntools/xsim/xsim.php'
 g_box         = 'folke@nabton.com:/var/www/html/sxntools/xsim/.'
-g_delay       = 5
+g_delay       = 10
 g_any = g_path+ "?msg=1&client=%s" % (g_client_name) 
 while 1:
     conn = httplib.HTTPConnection(g_server)
@@ -26,11 +26,9 @@ while 1:
             print ("Server Response:-_- %s %s " % (r1.status, r1.reason))
             line = r1.read()
             print line
-            # check if data1 has any order
             if 'xsim:' in line:
                 order=line.split(':')
                 xsys = order[1] + " > %s.res 2>&1" % (g_client_name)
-                #print line
                 print xsys
                 os.system(xsys);
                 xsys = "scp %s.res %s" % (g_client_name, g_box)

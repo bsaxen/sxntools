@@ -1,6 +1,8 @@
 <?php
+echo date("H:i:s");
+echo("<br>");
 $client = $_GET['client'];
- $file = $client.'.res';
+  $file = $client.'.res';
   $fh = fopen($file, 'r') or die("$client no data");
   while(!feof($fh)) 
   {

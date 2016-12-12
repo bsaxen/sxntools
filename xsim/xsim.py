@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #==================================================
 # xsim_client.py
-# 2016-12-10
+# 2016-12-12
 # Benny Saxen
 #
 # Prepare client for copy file to server
@@ -28,7 +28,10 @@ while 1:
             print line
             if 'xsim:' in line:
                 order=line.split(':')
-                xsys = order[1] + " > %s.res 2>&1" % (g_client_name)
+		        f = open('work','w')
+		        f.write(order[1])
+		        f.close()
+		        xsys = "sh ./work > %s.res 2>&1" % (g_client_name)
                 print xsys
                 os.system(xsys);
                 xsys = "scp %s.res %s" % (g_client_name, g_box)

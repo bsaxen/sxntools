@@ -1,10 +1,11 @@
 <?php
-// houseRpi.response
-// houseRpi.order
+//============================
+// Version: 2017-01-24
+//============================
 
 $client = $_GET['client']; // From client Id
-$msg    = $_GET['msg']; // Transaction Message type: 1 = any orders for me?, 2 = answer on latest order
-
+$msg    = $_GET['msg']; // Transaction Message type: 1 = any orders in mailbox
+//============================
 function savePolling($id)
 {
   $now  = date("Y-m-d H:i:s");
@@ -13,15 +14,7 @@ function savePolling($id)
   fwrite($fh, $now);
   fclose($fh);
 }
-
-function saveResult($id,$result)
-{
-  $file = $id.'.response';
-  $fh = fopen($file, 'w');
-  fwrite($fh, $result);
-  fclose($fh);
-}
-
+//============================
 function anyOrder($id)
 {
   $file = $id.'.order';
@@ -35,17 +28,11 @@ function anyOrder($id)
   fclose($fh);
   unlink($file);
 }
-
+//============================
 if ($msg == 1)  // check if any orders exists for this client id
 {
   savePolling($client);
   $order = anyOrder($client);
-}
-if ($msg == 2)
-{
-  $result = $_GET['result'];
-  saveAnswer($client,$result);
-  //clientLog($client,$result);
 }
 
 ?>

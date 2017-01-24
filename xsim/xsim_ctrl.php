@@ -62,6 +62,7 @@
     $file = 'pollList.work';
     if(file_exists($file))
     {
+      echo("<table>");
       $fh = fopen($file, 'r');
       while(!feof($fh)) 
       {
@@ -72,18 +73,19 @@
         {
           $temp = explode(".",$row);
           $id = $temp[0];
-          echo("<a href=\"xsim_ctrl.php?client=$id&do=show\">$id</a>");
+          echo("<tr><td><a href=\"xsim_ctrl.php?client=$id&do=show\">$id</a></td>");
           if(file_exists($row))
           { 
             $fh2 = fopen($row, 'r');
             $row = fgets($fh2);
             fclose($fh2);
-            echo(" [$row]");
+            echo(" <td>[$row]</td>");
           }
-          echo("<a href=\"xsim_ctrl.php?client=$id&do=delete\"> <i>delete</i> </a><br>");
+          echo("<td><a href=\"xsim_ctrl.php?client=$id&do=delete\"> <i>delete</i> </a></td></tr>");
         }
       }
     fclose($fh);
+    echo("</table>");
     }
   }
 

@@ -2,9 +2,11 @@
   <head>
   </head>
   <?php
+  $now = date("Y-m-d H:i:s");
   echo("<body>");
-  echo("<h1>XSIM Remote Control v1.0</h1>");
-
+  echo("<h1>XSIM Remote Control 2017-01-24</h1>");
+  echo("$now <br>");
+    
   if(isset($_GET['client']))
   {
     $client = $_GET['client'];
@@ -78,8 +80,18 @@
           { 
             $fh2 = fopen($row, 'r');
             $row = fgets($fh2);
+            
+            $start   = strtotime( $row );
+            $end     = strtotime( $now );
+            $temp    = $end - $start;  
+            $days    = floor($temp/86400);$rest = $temp%86400;
+            $hours   = floor($rest/3600);$rest = $temp%3600;
+            $minutes = floor($rest/60);$seconds = $temp%60;
+            $nmin    = floor($temp/60); 
+            
             fclose($fh2);
-            echo(" <td>[$row]</td>");
+            if($temp < 10 )echo(" <td><p style=\"color:#000000\">[$row]</p></td>");
+            if($temp > 10 )echo(" <td><p style=\"color:#CD0000\">[$row]</p></td>");
           }
           echo("<td><a href=\"xsim_ctrl.php?client=$id&do=delete\"> <i>delete</i> </a></td></tr>");
         }

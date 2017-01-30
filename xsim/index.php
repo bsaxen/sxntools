@@ -1,7 +1,19 @@
 <?php
+//=========================================
+//
+// 2017-01-30
+//=========================================
 include('lib.php');
-echo("<!doctype html>");
 
+$action = $_GET['action'];
+$p1 = $GET_['p1'];
+$p2 = $GET_['p2'];
+$p3 = $GET_['p3'];
+
+if($action) do_action($action,$p1,$p2,$p3);
+
+//=========================================
+echo("<!doctype html>");
 echo("<html>");
 echo("<head>");
     echo("<title>XSIM Remote Control</title>");
@@ -16,13 +28,22 @@ echo("</head>");
 echo("<body>");
 echo("<div id=\"container\">");
 echo("<a href=index.php?action=clear> Clear </a>");
-lib_unit_list();
-lib_running_processes();
-lib_command();
-lib_result_window();
+echo("<div id=\"d_header\">");
+    echo("This is header");
+echo("</div>");
+echo("<div id=\"d_left\">");
+    lib_display("UNIT_LIST");
+echo("</div>");
+echo("<div id=\"d_middle\">");
+    lib_display("COMMAND");
+echo("</div>");
+echo("<div id=\"d_right\">");
+    lib_display("HISTORY");
+echo("</div>");
+echo("<div id=\"d_footer\">");
+    echo("This is footer");
 echo("</div>");
 
 echo("</body>");
 echo("</html>");
-
 ?>

@@ -1,4 +1,5 @@
 <?php
+include('lib.php');
 echo("<!doctype html>");
 
 echo("<html>");
@@ -15,6 +16,10 @@ echo("</head>");
 echo("<body>");
 echo("<div id=\"container\">");
 echo("<a href=index.php?action=clear> Clear </a>");
+lib_unit_list();
+lib_running_processes();
+lib_command();
+lib_result_window();
 echo("</div>");
 
 echo("</body>");

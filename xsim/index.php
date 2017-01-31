@@ -20,10 +20,49 @@ echo("<head>");
     echo("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />");
     echo("<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js\"></script>");
     echo("<style>");
-    echo("body {
+    echo("
+    body {
         text-align: center;
-    }");
-    echo("</style>");
+    }
+    #d_left{
+        background: green;
+        border: 1px solid #AAAAAA;
+        padding: 10px;
+        color: #fff0;
+        width: 30%;
+    }
+    #d_middle{
+        background: yellow;
+        border: 1px solid #AAAAAA;
+        padding: 10px;
+        color: #ff0f;
+        width: 30%;
+    }
+    #d_right{
+        background: red;
+        border: 1px solid #AAAAAA;
+        padding: 10px;
+        color: #f0ff;
+        width: 30%;
+    }
+    #d_header{
+        background: black;
+        border: 1px solid #AAAAAA;
+        padding: 10px;
+        color: #0000;
+        height: 10%
+        width: 100%;
+    }
+    #d_footer{
+        background: white;
+        border: 1px solid #AAAAAA;
+        padding: 10px;
+        color: #aaaa;
+        height: 10%
+        width: 100%;
+    }
+    ");
+echo("</style>");
 echo("</head>");
 echo("<body>");
 echo("<div id=\"container\">");

@@ -5,6 +5,13 @@
 //=========================================
 include('lib.php');
 
+if ($_SERVER['REQUEST_METHOD'] == "POST")
+{
+    $unit = $_POST['unit'];
+    $order = $_POST['order'];
+    lib_saveOrder($unit,$order);
+}
+
 $action = $_GET['action'];
 $p1 = $GET_['p1'];
 $p2 = $GET_['p2'];
@@ -32,6 +39,7 @@ echo("<head>");
         padding: 10px;
         color: #fff0;
         width: 100%;
+        height: 100%;
     }
     #d_center{
         position: relative;
@@ -40,6 +48,7 @@ echo("<head>");
         padding: 10px;
         color: #fff0;
         width: 100%;
+        height: 100%;
     }
     #d_left{
         display: inline-block;
@@ -92,6 +101,22 @@ echo("</style>");
 echo("</head>");
 echo("<body>");
 echo("<div id=\"d_container\">");
+echo("<h1>XSIM Remote Control 2017-01-31</h1>");
+echo("$now <br>");
+
+if(isset($_GET['unit']))
+{
+  $unit = $_GET['unit'];
+  //$do = $_GET['do'];
+
+  echo("
+  <form action=\"index.php\" method=\"post\">
+        <input type=\"hidden\" name=\"unit\" value=\"$unit\" />
+        <input type=\"text\" name=\"order\" />
+        <button type=\"submit\">Execute $unit</button>
+  </form>
+  ");
+}
   echo("<a href=index.php?action=clear> Clear </a>");
   echo("<div id=\"d_header\">");
     echo("This is header");
@@ -99,15 +124,15 @@ echo("<div id=\"d_container\">");
   echo("<div id=\"d_center\">");
   echo("center");
   echo("<div id=\"d_left\">");
-   echo("left");
+   echo("RPi List");
     echo("<span id=\"list\"></span>");
   echo("</div>");
   echo("<div id=\"d_middle\">");
-    echo("middle");
+    echo("Response");
     echo("<span id=\"response\"></span>");
   echo("</div>");
   echo("<div id=\"d_right\">");
-    echo("right");
+    echo("History");
     echo("<span id=\"history\"></span>");
   echo("</div>");
   echo("</div>");
@@ -139,7 +164,8 @@ window.onload = function(){
             success:	setResponse,
             type:		'GET',
             data:		{
-            action: 'RESPONSE'
+            action: 'UNIT_RESPONSE',
+            unit: '$unit'
             }
         });
         $.ajax({
@@ -149,6 +175,16 @@ window.onload = function(){
             type:		'GET',
             data:		{
             action: 'UNIT_LIST'
+            }
+        });
+        $.ajax({
+            url:		'ajax.php',
+            dataType:	'json',
+            success:	setHistory,
+            type:		'GET',
+            data:		{
+            action: 'UNIT_HISTORY',
+            unit: '$unit'
             }
         });
     }
@@ -163,6 +199,12 @@ window.onload = function(){
     {
       console.log(result);
       document.getElementById(\"list\").innerHTML = result;
+    }
+
+    function setHistory(result)
+    {
+      console.log(result);
+      document.getElementById(\"history\").innerHTML = result;
     }
 }
 </script>

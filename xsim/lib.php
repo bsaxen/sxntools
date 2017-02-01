@@ -1,30 +1,46 @@
 <?php
-function lib_display($order)
+$now = date("Y-m-d H:i:s");
+//===========================================
+function lib_display($file)
+//===========================================
 {
-  //echo("lib_display:$order<br>");
-  $file = $order.'.xsim';
   if(file_exists($file))
   {
-    //echo("open file [$file]");
     $fh = fopen($file, 'r');
     $ix = 0;
     while(!feof($fh))
     {
-      $ix++;
-      //$dis[$ix] = fgets($fh);
-      //echo("$row<br>");
-      $dis = $dis.'<br>'.$ix.' '.fgets($fh);
+      $row = fgets($fh);
+      $row = trim($row);
+      $len = strlen($row);
+
+      if($len > 0)
+      {
+        $temp = explode(".",$row);
+        $id = $temp[0];
+        $ix++;
+        $dis = $dis.'<br>'.$ix.' <a href=index.php?unit='.$id.'>'.$id.'</a>';
+      }
     }
     fclose($fh);
-    //$dis[0] = $ix;
     return($dis);
   }
-  //$dis[0] = $ix;
-  return("No content");
+  return("No content $order");
 }
 
-function lib_do_action($action,$p1,$p2,$p3)
+//===========================================
+function lib_saveOrder($id,$order)
+//===========================================
 {
-  echo("do_action:$action<br>");
+  $file = $id.'.order';
+  $fh = fopen($file, 'w');
+  fwrite($fh, $order);
+  fclose($fh);
+
+  $file = $id.'.hist';
+  $fh = fopen($file, 'a+');
+  $row = $order.'\n';
+  fwrite($fh, $row);
+  fclose($fh);
 }
 ?>

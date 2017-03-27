@@ -44,8 +44,9 @@ function lib_display_res($file)
 
       if($len > 0)
       {
-        $temp = explode(".",$row);
-        $id = $temp[0];
+        //$temp = explode(".",$row);
+        //$id = $temp[0];
+        $id = $row;
         $ix++;
         $dis = $dis.'<br>'.sprintf("%'.9d", $ix).' '.$id;
       }

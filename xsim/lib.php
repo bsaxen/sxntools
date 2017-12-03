@@ -48,7 +48,7 @@ function lib_display_res($file)
         //$id = $temp[0];
         $id = $row;
         $ix++;
-        $dis = $dis.'<br>'.sprintf("%'.9d", $ix).' '.$id;
+        $dis = $dis.'<br>'.sprintf("%'-3d", $ix).' '.$id;
       }
     }
     fclose($fh);
@@ -85,12 +85,14 @@ function lib_display_hist($file)
 }
 
 //===========================================
-function lib_saveOrder($id,$order)
+function lib_saveOrder($id,$order,$delay)
 //===========================================
 {
+  echo("SaveOrder id=$id order=$order<br>");
   $file = $id.'.order';
   $fh = fopen($file, 'w');
-  fwrite($fh, $order);
+  $tot = 'xsim:'.$order.':'.$delay;
+  fwrite($fh, $tot);
   fclose($fh);
 
   $file = $id.'.hist';

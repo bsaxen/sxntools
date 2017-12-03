@@ -28,6 +28,7 @@ while 1:
             print line
             if 'xsim:' in line:
                 order=line.split(':')
+                g_delay = float(order[2])
                 f = open('work','w')
                 f.write(order[1])
                 f.close()

@@ -23,7 +23,7 @@ function anyOrder($id)
   $len = strlen($row);
   if($len >0)
   {
-    echo("xsim:$row");
+    echo("$row");
   }
   fclose($fh);
   unlink($file);

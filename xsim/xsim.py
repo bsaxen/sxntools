@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #==================================================
 # xsim_client.py
-# 2016-12-12
+# 2017-12-02
 # Benny Saxen
 #
 # Prepare client for copy file to server
@@ -12,11 +12,11 @@ import time
 import httplib
 import os
 g_client_name = 'test_name'
-g_server      = 'nabton.com'
-g_path        = '/sxntools/xsim/xsim.php'
-g_box         = 'folke@nabton.com:/var/www/html/sxntools/xsim/.'
-g_delay       = 10
-g_any = g_path+ "?msg=1&client=%s" % (g_client_name) 
+g_server      = 'url-xsim-server'
+g_path        = '/xsim.php' # set correct doc root
+g_box         = 'user@xsim-url.com:/var/www/html/sxntools/xsim/.'
+g_delay       = 5
+g_any = g_path+ "?msg=1&client=%s" % (g_client_name)
 while 1:
     conn = httplib.HTTPConnection(g_server)
     try:
@@ -28,10 +28,10 @@ while 1:
             print line
             if 'xsim:' in line:
                 order=line.split(':')
-		        f = open('work','w')
-		        f.write(order[1])
-		        f.close()
-		        xsys = "sh ./work > %s.res 2>&1" % (g_client_name)
+                f = open('work','w')
+                f.write(order[1])
+                f.close()
+                xsys = "sh ./work > %s.res 2>&1" % (g_client_name)
                 print xsys
                 os.system(xsys);
                 xsys = "scp %s.res %s" % (g_client_name, g_box)
@@ -40,6 +40,6 @@ while 1:
             print '-_- No response from server'
     except:
         print '-_- Not able to connect to server '+g_server
-    conn.close()
+        conn.close()
     time.sleep(g_delay)
 # End of file

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #==================================================
 # xsim_client.py
-# 2017-12-02
+# 2018-01-01
 # Benny Saxen
 #
 # Prepare client for copy file to server
@@ -41,6 +41,6 @@ while 1:
             print '-_- No response from server'
     except:
         print '-_- Not able to connect to server '+g_server
-        conn.close()
+    conn.close()
     time.sleep(g_delay)
 # End of file
